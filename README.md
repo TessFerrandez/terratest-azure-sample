@@ -1,6 +1,8 @@
 # Azure Terratest sample
 
-An variation of [Test Terraform modules in Azure by using Terratest](https://docs.microsoft.com/en-us/azure/terraform/terratest-in-terraform-modules) as this code stopped working as of terraform 0.12.
+This repo is a variation of [Test Terraform modules in Azure by using Terratest](https://docs.microsoft.com/en-us/azure/terraform/terratest-in-terraform-modules) as this code stopped working as of terraform 0.12.
+
+[Terratest](https://github.com/gruntwork-io/terratest) is a go library that allows you to write automated tests.
 
 Some of the install instructions assume that you are running bash/WSL on Windows 
 
@@ -81,3 +83,55 @@ In the folder /sample_go/math you can find some sample code based on the [golang
 go test
 ~~~
 4. Fix the test by setting the expected average to 1 and rerun the test
+
+## Integration test
+
+### What are we testing?
+In the first test, we'll test the whole install script.
+1. Run terraform init and apply
+2. Browse to the web page
+3. Test that the web page is deployed
+4. Run terraform destroy to revert to the state before the test.
+
+### Setting up the basics
+To do this, we create an "example" where we call the terraform module we created earlier, setting the input parameters, and an output parameter holding the webpage url that we can browse to and examine.
+
+1. Browse to /examples/hello-world
+2. Examine the main.tf file - note that we copy the index.html file and output the url
+3. Run **terraform init**, **terraform apply** and finally **terraform destroy** in this directory to see how it works
+
+You should see the output
+~~~
+Outputs:
+
+homepage = https://helloworlddata001.blob.core.windows.net/wwwroot/index.html
+~~~
+If not, run terraform refresh
+
+### The test
+To create an automated test using terratest, we create a go file (hello_world_example_test.go) in the /tests folder
+
+The key parts here are
+
+1. Set up the tf options, i.e. the folder for the terraform scripts, and the input variables
+2. Call terraform init and apply, and capture the homepage output variable
+3. Validate the web page
+4. Run terraform destroy (defer to end of function)
+
+### Run the test
+
+In order to run the tests, we need to download the dependencies
+
+1. **dep init -v** (run only once at the beginning)
+2. **dep ensure -v** (needs to be rerun if you import new packages)
+
+Run the test
+~~~
+go test ./tests/ -v -timeout 30m | tee test_outputlog.log
+~~~
+
+Optionally: Install the [terratest_log_parser](https://github.com/gruntwork-io/terratest#installing-the-utility-binaries) to parse the tests so you can integrate the results in the CI/CD pipeline
+
+to run the tests with the terratest_log_parser, see run_tests.sh
+
+*NOTE: I have some issues with this test, the output variables are empty, but leaving it here in case it is just my machine*
