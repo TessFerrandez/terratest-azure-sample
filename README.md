@@ -70,3 +70,14 @@ You should also be able to browse to the url, and get an empty page.
 ~~~
 terraform destroy
 ~~~
+
+## Run a basic go test to verify everything is working
+In the folder /sample_go/math you can find some sample code based on the [golang book](https://www.golang-book.com/books/intro)
+
+1. Navigate to the math folder
+2. Inspect the math_test.go tests - the first and the 3rd should pass, the second should fail
+3. Run the tests
+~~~ 
+go test
+~~~
+4. Fix the test by setting the expected average to 1 and rerun the test
