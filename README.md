@@ -37,7 +37,7 @@ The following resources are created as part of the script (main.tf)
 
 ## Try the terraform scripts
 
-From bash, in the modules/website directory
+From bash, in the [/modules/web-site](/modules/web-site) directory
 
 1. Log in with azure cli
 ~~~
@@ -74,10 +74,10 @@ terraform destroy
 ~~~
 
 ## Run a basic go test to verify everything is working
-In the folder /sample_go/math you can find some sample code based on the [golang book](https://www.golang-book.com/books/intro)
+In the folder [/sample_go/math](/sample_go/math) you can find some sample code based on the [golang book](https://www.golang-book.com/books/intro)
 
-1. Navigate to the math folder
-2. Inspect the math_test.go tests - the first and the 3rd should pass, the second should fail
+1. Navigate to the [/sample_go/math](/sample_go/math) folder
+2. Inspect the [math_test.go](/sample_go/math/math_test.go) tests - the first and the 3rd should pass, the second should fail
 3. Run the tests
 ~~~ 
 go test
@@ -96,7 +96,7 @@ In the first test, we'll test the whole install script.
 ### Setting up the basics
 To do this, we create an "example" where we call the terraform module we created earlier, setting the input parameters, and an output parameter holding the webpage url that we can browse to and examine.
 
-1. Browse to /examples/hello-world
+1. Browse to [/examples/hello-world](/examples/hello-world)
 2. Examine the main.tf file - note that we copy the index.html file and output the url
 3. Run **terraform init**, **terraform apply** and finally **terraform destroy** in this directory to see how it works
 
@@ -109,7 +109,7 @@ homepage = https://helloworlddata001.blob.core.windows.net/wwwroot/index.html
 If not, run terraform refresh
 
 ### The test
-To create an automated test using terratest, we create a go file (hello_world_example_test.go) in the /tests folder
+To create an automated test using terratest, we create a go file (hello_world_example_test.go) in the [/tests](/tests) folder
 
 The key parts here are
 
@@ -150,13 +150,13 @@ We want to test this a number of times with different website names, but don't n
 ### Setting up the basics
 We create a test fixture where we call the terraform module we created earlier, setting the input parameters
 
-1. Examine main.tf in the /modules/web-site directory and notice the logic for the azurerm_storage_account name -- this is what we are testing
-1. Browse to /tests/fixtures/storage-account-name
-2. Examine the main.tf file - note that we have an input variable website_name that we will pass in from the test
-3. Optionally: Run **terraform init** in this directory to prep the needed terraform modules
+1. Examine [/modules/web-site/main.tf] (/modules/web-site/main.tf) directory and notice the logic for the azurerm_storage_account name -- this is what we are testing
+2. Browse to [/tests/fixtures/storage-account-name](/tests/fixtures/storage-account-name)
+3. Examine the [main.tf](/tests/fixtures/storage-account-name/main.tf) file - note that we have an input variable website_name that we will pass in from the test
+4. Optionally: Run **terraform init** in this directory to prep the needed terraform modules
 
 ### The test
-To create an automated test using terratest, we create a go file (storage_account_name_unit_test.go) in the /tests folder
+To create an automated test using terratest, we create a go file ([storage_account_name_unit_test.go](/tests/storage_account_name_unit_test.go)) in the [/tests](/tests) folder
 
 The key parts here are
 
