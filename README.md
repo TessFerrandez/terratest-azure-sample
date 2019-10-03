@@ -17,7 +17,7 @@ https://techcommunity.microsoft.com/t5/Azure-Developer-Community-Blog/Configurin
 4. [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest)
 
 ## The Terraform scripts
-The scripts we want to test are stored in the **/modules/web-site** directory.  
+The scripts we want to test are stored in the [/modules/web-site](/modules/web-site) directory.  
 
 The following resources are created as part of the script (main.tf)
 
