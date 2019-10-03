@@ -150,7 +150,7 @@ We want to test this a number of times with different website names, but don't n
 ### Setting up the basics
 We create a test fixture where we call the terraform module we created earlier, setting the input parameters
 
-1. Examine [/modules/web-site/main.tf] (/modules/web-site/main.tf) directory and notice the logic for the azurerm_storage_account name -- this is what we are testing
+1. Examine [/modules/web-site/main.tf](/modules/web-site/main.tf) directory and notice the logic for the azurerm_storage_account name -- this is what we are testing
 2. Browse to [/tests/fixtures/storage-account-name](/tests/fixtures/storage-account-name)
 3. Examine the [main.tf](/tests/fixtures/storage-account-name/main.tf) file - note that we have an input variable website_name that we will pass in from the test
 4. Optionally: Run **terraform init** in this directory to prep the needed terraform modules
